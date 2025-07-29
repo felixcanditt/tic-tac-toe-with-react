@@ -5,17 +5,16 @@ export default function Player({ playerName, playerSymbol, onSetPlayerName }) {
   const [userInput, setUserInput] = useState('');
 
   function handleButtonClick() {
-    if (!isEditing) {
-      setIsEditing(true);
-    } else {
+    if (isEditing) {
       onSetPlayerName(userInput);
       setUserInput('');
-      setIsEditing(false);
     }
+
+    setIsEditing((editing) => !editing);
   }
 
-  function handleInput(e) {
-    const userInput = e.target.value;
+  function handleInput(event) {
+    const userInput = event.target.value;
     setUserInput(userInput);
   }
 
@@ -26,7 +25,7 @@ export default function Player({ playerName, playerSymbol, onSetPlayerName }) {
           <input
             type="text"
             value={userInput}
-            onChange={(e) => handleInput(e)}
+            onChange={handleInput}
             required
           />
         ) : (
