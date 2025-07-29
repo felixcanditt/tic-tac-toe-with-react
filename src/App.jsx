@@ -5,6 +5,7 @@ import GameBoard from './components/GameBoard';
 
 function App() {
   const [currentPlayer, setCurrentPlayer] = useState('X');
+  const [log, setLog] = useState(['']);
 
   return (
     <main>
@@ -17,9 +18,12 @@ function App() {
         <GameBoard
           currentPlayer={currentPlayer}
           onSetCurrentPlayer={setCurrentPlayer}
+          onSetLog={setLog}
         />
       </div>
-      LOG
+      {log.map((el) => (
+        <p>{el}</p>
+      ))}
     </main>
   );
 }

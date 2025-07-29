@@ -6,7 +6,11 @@ const initialGameBoard = [
   [null, null, null],
 ];
 
-export default function GameBoard({ currentPlayer, onSetCurrentPlayer }) {
+export default function GameBoard({
+  currentPlayer,
+  onSetCurrentPlayer,
+  onSetLog,
+}) {
   const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
   function checkForWinner() {
@@ -28,6 +32,12 @@ export default function GameBoard({ currentPlayer, onSetCurrentPlayer }) {
       updatedBoard[rowIndex][columnIndex] = currentPlayer;
       return updatedBoard;
     });
+
+    // onSetLog((prevLog) => {
+    //   const updatedLog = [...prevLog];
+    //   updatedLog = [...updatedLog, currentPlayer];
+    //   return updatedLog;
+    // });
 
     onSetCurrentPlayer((player) => {
       if (player === 'X') {
