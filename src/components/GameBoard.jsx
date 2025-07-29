@@ -6,9 +6,8 @@ const initialGameBoard = [
   [null, null, null],
 ];
 
-export default function GameBoard() {
+export default function GameBoard({ currentPlayer, onSetCurrentPlayer }) {
   const [gameBoard, setGameBoard] = useState(initialGameBoard);
-  const [player, setPlayer] = useState('X');
 
   function checkForWinner() {
     const winner = false;
@@ -19,18 +18,18 @@ export default function GameBoard() {
     }
   }
 
-  checkForWinner();
+  //checkForWinner();
 
   function handleClick(rowIndex, columnIndex) {
     setGameBoard((prevGameBoard) => {
       const updatedBoard = [
         ...prevGameBoard.map((innerArray) => [...innerArray]),
       ];
-      updatedBoard[rowIndex][columnIndex] = player;
+      updatedBoard[rowIndex][columnIndex] = currentPlayer;
       return updatedBoard;
     });
 
-    setPlayer((player) => {
+    onSetCurrentPlayer((player) => {
       if (player === 'X') {
         return 'O';
       } else {
