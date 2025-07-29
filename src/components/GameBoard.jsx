@@ -8,7 +8,7 @@ const initialGameBoard = [
 
 export default function GameBoard({
   currentPlayer,
-  onSetCurrentPlayer,
+  onHandleSelectSquare,
   onSetLog,
 }) {
   const [gameBoard, setGameBoard] = useState(initialGameBoard);
@@ -39,13 +39,7 @@ export default function GameBoard({
     //   return updatedLog;
     // });
 
-    onSetCurrentPlayer((player) => {
-      if (player === 'X') {
-        return 'O';
-      } else {
-        return 'X';
-      }
-    });
+    onHandleSelectSquare();
   }
 
   return (

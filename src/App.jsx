@@ -7,6 +7,10 @@ function App() {
   const [currentPlayer, setCurrentPlayer] = useState('X');
   const [log, setLog] = useState(['']);
 
+  function handleSelectSquare() {
+    setCurrentPlayer((player) => (player === 'X' ? 'O' : 'X'));
+  }
+
   return (
     <main>
       <div id="game-container">
@@ -15,17 +19,17 @@ function App() {
           <Player
             initialName="Susanne"
             playerSymbol="X"
-            currentPlayer={currentPlayer}
+            isActive={currentPlayer === 'X'}
           />
           <Player
             initialName="Greta"
             playerSymbol="O"
-            currentPlayer={currentPlayer}
+            isActive={currentPlayer === 'O'}
           />
         </ol>
         <GameBoard
           currentPlayer={currentPlayer}
-          onSetCurrentPlayer={setCurrentPlayer}
+          onHandleSelectSquare={handleSelectSquare}
           onSetLog={setLog}
         />
       </div>
