@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
-export default function Player() {
+export default function Player({ initialName }) {
   const [showInput, setShowInput] = useState(false);
   const [userInput, setUserInput] = useState('');
-  const [playerName, setPlayerName] = useState('Max');
+  const [playerName, setPlayerName] = useState(initialName);
+  console.log(1, initialName);
 
   function handleEditClick() {
     setShowInput(true);
