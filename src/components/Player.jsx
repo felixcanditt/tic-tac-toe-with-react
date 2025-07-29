@@ -1,21 +1,16 @@
 import { useState } from 'react';
 
-export default function Player({ playerName, playerSymbol, onSetPlayerName }) {
+export default function Player({ initialName, playerSymbol }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [userInput, setUserInput] = useState('');
+  const [playerName, setPlayerName] = useState(initialName);
 
   function handleButtonClick() {
-    if (isEditing) {
-      onSetPlayerName(userInput);
-      setUserInput('');
-    }
-
     setIsEditing((editing) => !editing);
   }
 
   function handleInput(event) {
     const userInput = event.target.value;
-    setUserInput(userInput);
+    setPlayerName(userInput);
   }
 
   return (
@@ -24,7 +19,7 @@ export default function Player({ playerName, playerSymbol, onSetPlayerName }) {
         {isEditing ? (
           <input
             type="text"
-            value={userInput}
+            value={playerName}
             onChange={handleInput}
             required
           />
