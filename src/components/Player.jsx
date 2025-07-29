@@ -1,10 +1,8 @@
 import { useState } from 'react';
 
-export default function Player({ initialName }) {
+export default function Player({ playerName, onSetPlayerName }) {
   const [showInput, setShowInput] = useState(false);
   const [userInput, setUserInput] = useState('');
-  const [playerName, setPlayerName] = useState(initialName);
-  console.log(1, initialName);
 
   function handleEditClick() {
     setShowInput(true);
@@ -16,7 +14,7 @@ export default function Player({ initialName }) {
   }
 
   function saveInput() {
-    setPlayerName(userInput);
+    onSetPlayerName(userInput);
     setUserInput('');
     setShowInput(false);
   }

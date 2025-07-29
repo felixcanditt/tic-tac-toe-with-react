@@ -3,19 +3,24 @@ import { useState } from 'react';
 import Player from './components/Player';
 
 function App() {
+  const [firstPlayerName, setFirstPlayerName] = useState('Hans');
+  const [secondPlayerName, setSecondPlayerName] = useState('Senna');
+
   return (
     <main>
       <div id="game-container">
         <ol id="players">
-          <Player initialName="Tim" />
-          <Player initialName="Max" />
-
-          <li>
-            <span className="player-name">Player 2</span>
-            <span className="player-symbol">0</span>
-          </li>
+          <Player
+            playerName={firstPlayerName}
+            onSetPlayerName={setFirstPlayerName}
+          />
+          <Player
+            playerName={secondPlayerName}
+            onSetPlayerName={setSecondPlayerName}
+          />
         </ol>
-        GAME BOARD
+        <p>1playerName: {firstPlayerName}</p>
+        <p>2playerName: {secondPlayerName}</p>
       </div>
       LOG
     </main>
