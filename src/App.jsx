@@ -11,9 +11,17 @@ function App() {
     <main>
       <div id="game-container">
         <p>{currentPlayer}</p>
-        <ol id="players">
-          <Player initialName="Susanne" playerSymbol="X" />
-          <Player initialName="Greta" playerSymbol="O" />
+        <ol id="players" className="highlight-player">
+          <Player
+            initialName="Susanne"
+            playerSymbol="X"
+            currentPlayer={currentPlayer}
+          />
+          <Player
+            initialName="Greta"
+            playerSymbol="O"
+            currentPlayer={currentPlayer}
+          />
         </ol>
         <GameBoard
           currentPlayer={currentPlayer}
