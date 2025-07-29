@@ -8,17 +8,24 @@ const initialGameBoard = [
 
 export default function GameBoard() {
   const [gameBoard, setGameBoard] = useState(initialGameBoard);
-  console.log(1, gameBoard);
+  const [player, setPlayer] = useState('X');
 
   function handleClick(rowIndex, columnIndex) {
     setGameBoard((prevGameBoard) => {
       const updatedBoard = [
         ...prevGameBoard.map((innerArray) => [...innerArray]),
       ];
-      updatedBoard[rowIndex][columnIndex] = 1;
+      updatedBoard[rowIndex][columnIndex] = player;
       return updatedBoard;
     });
-    //console.log(3, gameBoard);
+
+    setPlayer((player) => {
+      if (player === 'X') {
+        return 'O';
+      } else {
+        return 'X';
+      }
+    });
   }
 
   return (
