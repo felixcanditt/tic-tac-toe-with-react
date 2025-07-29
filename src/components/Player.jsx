@@ -1,11 +1,18 @@
 import { useState } from 'react';
 
-export default function Player({ playerName, onSetPlayerName }) {
+export default function Player({ playerName, playerSymbol, onSetPlayerName }) {
   const [showInput, setShowInput] = useState(false);
   const [userInput, setUserInput] = useState('');
 
-  function handleEditClick() {
-    setShowInput(true);
+  function handleButtonClick() {
+    console.log(1);
+    if (!showInput) {
+      setShowInput(true);
+    } else {
+      onSetPlayerName(userInput);
+      setUserInput('');
+      setShowInput(false);
+    }
   }
 
   function handleInput(e) {
@@ -13,16 +20,13 @@ export default function Player({ playerName, onSetPlayerName }) {
     setUserInput(userInput);
   }
 
-  function saveInput() {
-    onSetPlayerName(userInput);
-    setUserInput('');
-    setShowInput(false);
-  }
   return (
     <li>
-      <span className="player-name">{playerName}</span>
-      <span className="player-symbol">X</span>
-      <button onClick={() => handleEditClick()}>EDIT</button>
+      <span className="player">
+        <span className="player-name">{playerName}</span>
+        <span className="player-symbol">{playerSymbol}</span>
+      </span>
+
       {showInput && (
         <>
           <input
@@ -30,9 +34,12 @@ export default function Player({ playerName, onSetPlayerName }) {
             value={userInput}
             onChange={(e) => handleInput(e)}
           />
-          <button onClick={() => saveInput()}>SAVE</button>
         </>
       )}
+
+      <button onClick={() => handleButtonClick()}>
+        {showInput ? 'Save' : 'Edit'}
+      </button>
     </li>
   );
 }

@@ -12,10 +12,12 @@ function App() {
         <ol id="players">
           <Player
             playerName={firstPlayerName}
+            playerSymbol="X"
             onSetPlayerName={setFirstPlayerName}
           />
           <Player
             playerName={secondPlayerName}
+            playerSymbol="O"
             onSetPlayerName={setSecondPlayerName}
           />
         </ol>
