@@ -11,16 +11,13 @@ export default function GameBoard() {
   console.log(1, gameBoard);
 
   function handleClick(rowIndex, columnIndex) {
-    console.log(5, gameBoard);
-    const oldGameBoard = gameBoard;
-    console.log(10, oldGameBoard);
-
-    oldGameBoard[rowIndex][columnIndex] = 1;
-    console.log(100, oldGameBoard);
-
-    // const updatedGameBoard
-
-    setGameBoard(oldGameBoard);
+    setGameBoard((prevGameBoard) => {
+      const updatedBoard = [
+        ...prevGameBoard.map((innerArray) => [...innerArray]),
+      ];
+      updatedBoard[rowIndex][columnIndex] = 1;
+      return updatedBoard;
+    });
     //console.log(3, gameBoard);
   }
 
