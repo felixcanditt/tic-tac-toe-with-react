@@ -102,34 +102,34 @@ function App() {
       //   playerOTurns
       // );
 
-      WINNING_COMBINATIONS.map((winningCombination, combinationIndex) => {
-        let counter = 0;
-        winningCombination.map((winninqSquare, squareIndex) => {
-          const squareMatch = playerXTurns.map((turn) => {
+      WINNING_COMBINATIONS.map((winningCombination) => {
+        let playerXCounter = 0;
+        let playerOCounter = 0;
+
+        winningCombination.map((winninqSquare) => {
+          playerXTurns.map((turn) => {
             if (
               turn.row === winninqSquare.row &&
               turn.column === winninqSquare.column
             ) {
-              counter += 1;
+              playerXCounter += 1;
             }
           });
-          // if (combinationIndex === 7) {
-          //   console.log(
-          //     'winningCombination',
-          //     winningCombination,
-          //     'combinationIndex',
-          //     combinationIndex,
-          //     'squareIndex',
-          //     squareIndex,
-          //     'squareMatches',
-          //     squareMatch,
-          //     'squareMatches.length === 3',
-          //     squareMatch
-          //   );
-          // }
+
+          playerOTurns.map((turn) => {
+            if (
+              turn.row === winninqSquare.row &&
+              turn.column === winninqSquare.column
+            ) {
+              playerOCounter += 1;
+            }
+          });
         });
-        if (counter === 3) {
-          console.log(1);
+        if (playerXCounter === 3) {
+          console.log('x');
+        }
+        if (playerOCounter === 3) {
+          console.log('O');
         }
       });
     }
