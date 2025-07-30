@@ -59,6 +59,7 @@ function deriveActivePlayer(gameTurns) {
 
 function App() {
   const [gameTurns, setGameTurns] = useState([]);
+  let winner = '';
 
   const currentPlayer = deriveActivePlayer(gameTurns);
 
@@ -91,16 +92,6 @@ function App() {
           playerOTurns.push(turn.square);
         }
       });
-      //playerOTurns = gameTurns.filter((turn) => turn.player === 'O');
-
-      // console.log(
-      //   'gameTurns',
-      //   gameTurns,
-      //   'playerXTurns',
-      //   playerXTurns,
-      //   'playerOTurns',
-      //   playerOTurns
-      // );
 
       WINNING_COMBINATIONS.map((winningCombination) => {
         let playerXCounter = 0;
@@ -126,10 +117,10 @@ function App() {
           });
         });
         if (playerXCounter === 3) {
-          console.log('x');
+          winner = 'X';
         }
         if (playerOCounter === 3) {
-          console.log('O');
+          winner = 'O';
         }
       });
     }
@@ -138,6 +129,12 @@ function App() {
   return (
     <main>
       <div id="game-container">
+        {winner != '' && (
+          <p>
+            The winner is
+            {winner}!
+          </p>
+        )}
         <ol id="players" className="highlight-player">
           <Player
             initialName="Susanne"
