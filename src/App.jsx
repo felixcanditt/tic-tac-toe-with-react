@@ -4,47 +4,12 @@ import Player from './components/Player';
 import GameBoard from './components/GameBoard';
 import Log from './components/Log';
 
-const WINNING_COMBINATIONS = [
-  [
-    { row: 0, column: 0 },
-    { row: 0, column: 1 },
-    { row: 0, column: 2 },
-  ],
-  [
-    { row: 1, column: 0 },
-    { row: 1, column: 1 },
-    { row: 1, column: 2 },
-  ],
-  [
-    { row: 2, column: 0 },
-    { row: 2, column: 1 },
-    { row: 2, column: 2 },
-  ],
-  [
-    { row: 0, column: 0 },
-    { row: 1, column: 0 },
-    { row: 2, column: 0 },
-  ],
-  [
-    { row: 0, column: 1 },
-    { row: 1, column: 1 },
-    { row: 2, column: 1 },
-  ],
-  [
-    { row: 0, column: 2 },
-    { row: 1, column: 2 },
-    { row: 2, column: 2 },
-  ],
-  [
-    { row: 0, column: 0 },
-    { row: 1, column: 1 },
-    { row: 2, column: 2 },
-  ],
-  [
-    { row: 0, column: 2 },
-    { row: 1, column: 1 },
-    { row: 2, column: 0 },
-  ],
+import { WINNING_COMBINATIONS } from '../winning-combinations';
+
+const initialGameBoard = [
+  [null, null, null],
+  [null, null, null],
+  [null, null, null],
 ];
 
 function deriveActivePlayer(gameTurns) {
@@ -63,6 +28,32 @@ function App() {
 
   const currentPlayer = deriveActivePlayer(gameTurns);
 
+  let gameBoard = initialGameBoard;
+
+  for (const turn of gameTurns) {
+    const { player, square } = turn;
+    const { row, column } = square;
+
+    gameBoard[row][column] = player;
+  }
+
+  for (const combination of WINNING_COMBINATIONS) {
+    const firstSquareSymbol =
+      gameBoard[combination[0].row][combination[0].column];
+    const secondSquareSymbol =
+      gameBoard[combination[1].row][combination[1].column];
+    const thirdSquareSymbol =
+      gameBoard[combination[2].row][combination[2].column];
+
+    if (
+      firstSquareSymbol &&
+      firstSquareSymbol === secondSquareSymbol &&
+      firstSquareSymbol === thirdSquareSymbol
+    ) {
+      winner = firstSquareSymbol;
+    }
+  }
+
   function handleSelectSquare(rowIndex, columnIndex) {
     setGameTurns((prevTurns) => {
       let activePlayer = deriveActivePlayer(prevTurns);
@@ -76,54 +67,6 @@ function App() {
       updatedTurns = [newTurn, ...updatedTurns];
       return updatedTurns;
     });
-  }
-
-  checkForWinner();
-
-  function checkForWinner() {
-    if (gameTurns.length > 0) {
-      let playerXTurns = [];
-      let playerOTurns = [];
-
-      gameTurns.map((turn) => {
-        if (turn.player === 'X') {
-          playerXTurns.push(turn.square);
-        } else {
-          playerOTurns.push(turn.square);
-        }
-      });
-
-      WINNING_COMBINATIONS.map((winningCombination) => {
-        let playerXCounter = 0;
-        let playerOCounter = 0;
-
-        winningCombination.map((winninqSquare) => {
-          playerXTurns.map((turn) => {
-            if (
-              turn.row === winninqSquare.row &&
-              turn.column === winninqSquare.column
-            ) {
-              playerXCounter += 1;
-            }
-          });
-
-          playerOTurns.map((turn) => {
-            if (
-              turn.row === winninqSquare.row &&
-              turn.column === winninqSquare.column
-            ) {
-              playerOCounter += 1;
-            }
-          });
-        });
-        if (playerXCounter === 3) {
-          winner = 'X';
-        }
-        if (playerOCounter === 3) {
-          winner = 'O';
-        }
-      });
-    }
   }
 
   return (
@@ -149,7 +92,7 @@ function App() {
         </ol>
         <GameBoard
           onHandleSelectSquare={handleSelectSquare}
-          gameTurns={gameTurns}
+          gameBoard={gameBoard}
         />
       </div>
       <Log gameTurns={gameTurns} />
