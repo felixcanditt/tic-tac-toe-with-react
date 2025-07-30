@@ -7,9 +7,11 @@ const initialGameBoard = [
 export default function GameBoard({ onHandleSelectSquare, gameTurns }) {
   let gameBoard = initialGameBoard;
 
-  if (gameTurns.length > 0) {
-    gameBoard[gameTurns[0].square.row][gameTurns[0].square.column] =
-      gameTurns[0].player;
+  for (const turn of gameTurns) {
+    const { player, square } = turn;
+    const { row, column } = square;
+
+    gameBoard[row][column] = player;
   }
 
   function checkForWinner() {
