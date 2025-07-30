@@ -5,10 +5,19 @@ import GameBoard from './components/GameBoard';
 
 function App() {
   const [currentPlayer, setCurrentPlayer] = useState('X');
-  const [log, setLog] = useState([]);
+  const [gameTurns, setGameTurns] = useState([]);
 
-  function handleSelectSquare() {
+  function handleSelectSquare(rowIndex, columnIndex) {
     setCurrentPlayer((player) => (player === 'X' ? 'O' : 'X'));
+    setGameTurns((prevTurns) => {
+      const newTurn = {
+        player: currentPlayer,
+        square: { row: rowIndex, column: columnIndex },
+      };
+      let updatedTurns = [...prevTurns];
+      updatedTurns = [...updatedTurns, newTurn];
+      return updatedTurns;
+    });
   }
 
   return (
@@ -30,11 +39,10 @@ function App() {
         <GameBoard
           currentPlayer={currentPlayer}
           onHandleSelectSquare={handleSelectSquare}
-          onSetLog={setLog}
         />
       </div>
-      {log.reverse().map((el) => {
-        const logString = `Player ${el[0]} played x:${el[1]}, y:${el[2]}`;
+      {gameTurns.reverse().map((el) => {
+        const logString = `Player ${el.player} played x:${el.square.row}, y:${el.square.column}`;
         return <p>{logString}</p>;
       })}
     </main>
