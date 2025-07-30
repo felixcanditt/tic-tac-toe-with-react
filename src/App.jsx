@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import Player from './components/Player';
 import GameBoard from './components/GameBoard';
+import Log from './components/Log';
 
 function App() {
   const [currentPlayer, setCurrentPlayer] = useState('X');
@@ -30,7 +31,6 @@ function App() {
   return (
     <main>
       <div id="game-container">
-        <p>{currentPlayer}</p>
         <ol id="players" className="highlight-player">
           <Player
             initialName="Susanne"
@@ -49,10 +49,7 @@ function App() {
           gameTurns={gameTurns}
         />
       </div>
-      {gameTurns.map((el) => {
-        const logString = `Player ${el.player} played x:${el.square.row}, y:${el.square.column}`;
-        return <p>{logString}</p>;
-      })}
+      <Log gameTurns={gameTurns} />
     </main>
   );
 }
