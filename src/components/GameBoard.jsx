@@ -33,7 +33,7 @@ export default function GameBoard({ onHandleSelectSquare, gameTurns }) {
             {row.map((playerSymbol, columnIndex) => (
               <li key={columnIndex}>
                 <button
-                  disabled={playerSymbol}
+                  disabled={playerSymbol != null}
                   onClick={() => onHandleSelectSquare(rowIndex, columnIndex)}
                 >
                   {playerSymbol}
