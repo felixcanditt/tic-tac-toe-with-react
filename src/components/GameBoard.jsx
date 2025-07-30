@@ -33,11 +33,13 @@ export default function GameBoard({
       return updatedBoard;
     });
 
-    // onSetLog((prevLog) => {
-    //   const updatedLog = [...prevLog];
-    //   updatedLog = [...updatedLog, currentPlayer];
-    //   return updatedLog;
-    // });
+    onSetLog((prevLog) => {
+      const newLog = [currentPlayer, rowIndex, columnIndex];
+      let updatedLog = [...prevLog];
+      updatedLog = [...updatedLog, newLog];
+      console.log(updatedLog);
+      return updatedLog;
+    });
 
     onHandleSelectSquare();
   }
