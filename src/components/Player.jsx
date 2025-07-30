@@ -1,10 +1,18 @@
 import { useState } from 'react';
 
-export default function Player({ initialName, playerSymbol, isActive }) {
+export default function Player({
+  initialName,
+  playerSymbol,
+  isActive,
+  onHandlePlayerNameChange,
+}) {
   const [isEditing, setIsEditing] = useState(false);
   const [playerName, setPlayerName] = useState(initialName);
 
   function handleButtonClick() {
+    if (isEditing) {
+      onHandlePlayerNameChange(playerSymbol, playerName);
+    }
     setIsEditing((editing) => !editing);
   }
 
