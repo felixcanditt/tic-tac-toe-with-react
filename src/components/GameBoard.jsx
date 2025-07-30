@@ -9,9 +9,18 @@ const initialGameBoard = [
 export default function GameBoard({
   currentPlayer,
   onHandleSelectSquare,
-  onSetLog,
+  gameTurns,
 }) {
   const [gameBoard, setGameBoard] = useState(initialGameBoard);
+
+  let newGameBoard = initialGameBoard;
+  console.log(gameTurns);
+
+  if (gameTurns.length > 0) {
+    newGameBoard[gameTurns[0].square.row][gameTurns[0].square.column] =
+      gameTurns[0].player;
+    console.log('newGameBoard', newGameBoard);
+  }
 
   function checkForWinner() {
     const winner = false;
@@ -38,12 +47,15 @@ export default function GameBoard({
 
   return (
     <ol id="game-board">
-      {gameBoard.map((row, rowIndex) => (
+      {newGameBoard.map((row, rowIndex) => (
         <li key={rowIndex}>
           <ol>
             {row.map((playerSymbol, columnIndex) => (
               <li key={columnIndex}>
-                <button onClick={() => handleClick(rowIndex, columnIndex)}>
+                <button
+                  disabled={playerSymbol}
+                  onClick={() => handleClick(rowIndex, columnIndex)}
+                >
                   {playerSymbol}
                 </button>
               </li>
