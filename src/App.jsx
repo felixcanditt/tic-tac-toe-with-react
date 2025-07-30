@@ -41,9 +41,9 @@ const WINNING_COMBINATIONS = [
     { row: 2, column: 2 },
   ],
   [
-    { row: 2, column: 2 },
+    { row: 0, column: 2 },
     { row: 1, column: 1 },
-    { row: 0, column: 0 },
+    { row: 2, column: 0 },
   ],
 ];
 
@@ -93,24 +93,44 @@ function App() {
       });
       //playerOTurns = gameTurns.filter((turn) => turn.player === 'O');
 
-      console.log(
-        'gameTurns',
-        gameTurns,
-        'playerXTurns',
-        playerXTurns,
-        'playerOTurns',
-        playerOTurns
-      );
+      // console.log(
+      //   'gameTurns',
+      //   gameTurns,
+      //   'playerXTurns',
+      //   playerXTurns,
+      //   'playerOTurns',
+      //   playerOTurns
+      // );
 
-      WINNING_COMBINATIONS.map((combination) => {
-        combination.map((square) => {
-          const match = playerXTurns.map((turn) => {
-            const isMatch =
-              turn.row === square.row && turn.column === square.column;
-            console.log(turn, square, isMatch);
+      WINNING_COMBINATIONS.map((winningCombination, combinationIndex) => {
+        let counter = 0;
+        winningCombination.map((winninqSquare, squareIndex) => {
+          const squareMatch = playerXTurns.map((turn) => {
+            if (
+              turn.row === winninqSquare.row &&
+              turn.column === winninqSquare.column
+            ) {
+              counter += 1;
+            }
           });
-          console.log(match);
+          // if (combinationIndex === 7) {
+          //   console.log(
+          //     'winningCombination',
+          //     winningCombination,
+          //     'combinationIndex',
+          //     combinationIndex,
+          //     'squareIndex',
+          //     squareIndex,
+          //     'squareMatches',
+          //     squareMatch,
+          //     'squareMatches.length === 3',
+          //     squareMatch
+          //   );
+          // }
         });
+        if (counter === 3) {
+          console.log(1);
+        }
       });
     }
   }
