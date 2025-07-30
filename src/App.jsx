@@ -4,6 +4,49 @@ import Player from './components/Player';
 import GameBoard from './components/GameBoard';
 import Log from './components/Log';
 
+const WINNING_COMBINATIONS = [
+  [
+    { row: 0, col: 0 },
+    { row: 0, col: 1 },
+    { row: 0, col: 2 },
+  ],
+  [
+    { row: 1, col: 0 },
+    { row: 1, col: 1 },
+    { row: 1, col: 2 },
+  ],
+  [
+    { row: 2, col: 0 },
+    { row: 2, col: 1 },
+    { row: 2, col: 2 },
+  ],
+  [
+    { row: 0, col: 0 },
+    { row: 1, col: 0 },
+    { row: 2, col: 0 },
+  ],
+  [
+    { row: 0, col: 1 },
+    { row: 1, col: 1 },
+    { row: 2, col: 1 },
+  ],
+  [
+    { row: 0, col: 2 },
+    { row: 1, col: 2 },
+    { row: 2, col: 2 },
+  ],
+  [
+    { row: 0, col: 0 },
+    { row: 1, col: 1 },
+    { row: 2, col: 2 },
+  ],
+  [
+    { row: 2, col: 2 },
+    { row: 1, col: 1 },
+    { row: 0, col: 0 },
+  ],
+];
+
 function deriveActivePlayer(gameTurns) {
   let currentPlayer = 'X';
 
@@ -32,6 +75,33 @@ function App() {
       updatedTurns = [newTurn, ...updatedTurns];
       return updatedTurns;
     });
+  }
+
+  checkForWinner();
+
+  function checkForWinner() {
+    if (gameTurns.length > 0) {
+      let playerXTurns = [];
+      let playerOTurns = [];
+
+      gameTurns.map((turn) => {
+        if (turn.player === 'X') {
+          playerXTurns.push(turn.square);
+        } else {
+          playerOTurns.push(turn.square);
+        }
+      });
+      //playerOTurns = gameTurns.filter((turn) => turn.player === 'O');
+
+      console.log(
+        'gameTurns',
+        gameTurns,
+        'playerXTurns',
+        playerXTurns,
+        'playerOTurns',
+        playerOTurns
+      );
+    }
   }
 
   return (

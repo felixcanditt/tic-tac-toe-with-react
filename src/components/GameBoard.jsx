@@ -14,17 +14,6 @@ export default function GameBoard({ onHandleSelectSquare, gameTurns }) {
     gameBoard[row][column] = player;
   }
 
-  function checkForWinner() {
-    const winner = false;
-    console.log(gameBoard[0][0] === gameBoard[0][1]);
-
-    if ((gameBoard[0][0] === gameBoard[0][1]) === gameBoard[0][2]) {
-      console.log(2);
-    }
-  }
-
-  //checkForWinner();
-
   return (
     <ol id="game-board">
       {gameBoard.map((row, rowIndex) => (
